@@ -2,6 +2,12 @@
 
 Create a web-based quiz application that allows users to take quizzes on various topics. Users should be able to select a quiz category, answer multiple-choice questions, and receive a score at the end of the quiz. The app should provide feedback on correct and incorrect answers and keep track of the user's score.
 
+## Extra Points
+
+- How would you implement a timer feature for each quiz question, where users have a limited time to answer, adding an element of urgency to the quiz?
+- What enhancements could you make to the user interface, such as adding multimedia elements like images or videos to questions, or providing hints for difficult questions?
+- Can you add a leaderboard or high-score tracking functionality, allowing users to compete with others and share their quiz scores on social media platforms?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

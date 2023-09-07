@@ -2,6 +2,12 @@
 
 Build a simple image carousel that allows users to navigate through a collection of images using JavaScript. Include features like auto-play, next/previous buttons, and a navigation indicator.
 
+## Extra Points
+
+- How would you implement the ability for users to customize the transition effects between images in the carousel?
+- What techniques would you use to optimize image loading and performance, especially when dealing with a large number of images?
+- Can you add an additional feature that allows users to swipe left or right on mobile devices to navigate the carousel, enhancing the user experience for touch screens?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

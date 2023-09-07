@@ -2,6 +2,12 @@
 
 Build a Recipe Finder App that helps users find recipes based on the ingredients they have. Users should be able to enter ingredients they have at home, and the app will provide a list of recipes that can be made using those ingredients. You should integrate with a recipe API of your choice to fetch recipe data.
 
+## Extra Points
+
+- How would you implement a feature that allows users to filter recipes by dietary preferences, such as vegetarian, vegan, or gluten-free?
+- What strategies would you use to provide users with nutritional information for each recipe, including calories, protein, and other relevant details?
+- Can you integrate a social sharing feature, enabling users to share their favorite recipes on popular social media platforms or via email?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

@@ -2,6 +2,12 @@
 
 Create a web form with input fields like name, email, and password. Implement real-time validation using JavaScript to provide feedback to the user as they type. Ensure that it checks for valid email format, password strength, and other relevant criteria.
 
+## Extra Points
+
+- How would you enhance the form to handle dynamic sections, such as adding and removing entire sets of fields?
+- What additional user feedback mechanisms could you implement to enhance the validation experience beyond simple error messages?
+- How would you approach creating a reusable library or component for form validation that can be easily integrated into various projects?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

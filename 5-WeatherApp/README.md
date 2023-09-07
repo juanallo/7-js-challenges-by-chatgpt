@@ -2,6 +2,12 @@
 
 Build a weather app that fetches weather data from a public API based on user input (e.g., city or zip code). Display the current weather and a 3-day forecast. Use JavaScript to make asynchronous API requests and render the data dynamically.
 
+## Extra Points
+
+- How would you enhance the user experience by incorporating geolocation to automatically detect the user's location and provide weather information without manual input?
+- What additional weather data or features could you integrate, such as air quality index, UV index, or historical weather data for a selected location?
+- Can you implement a feature that allows users to switch between different units of measurement (e.g., Fahrenheit and Celsius) for temperature and wind speed, enhancing accessibility for users from various regions?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

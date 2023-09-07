@@ -2,6 +2,12 @@
 
 Build a Quote Generator App that generates and displays random quotes to users. You should integrate with a quote API to fetch random quotes and display them on the webpage. Users can click a button to load a new random quote.
 
+## Extra Points
+
+- How could you allow users to save their favorite quotes, creating a personal collection they can revisit and share with others?
+- What additional features or filters could you add, such as categorizing quotes by themes or authors, to enhance the user's experience in exploring and discovering quotes?
+- Can you implement a feature that allows users to generate and share visually appealing quote images, making it easy for them to post on social media platforms or use as wallpapers?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |

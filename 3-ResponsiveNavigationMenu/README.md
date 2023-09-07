@@ -2,6 +2,12 @@
 
 Create a responsive navigation menu that collapses into a hamburger menu on smaller screens. Use HTML, CSS, and JavaScript to make it functional. It should smoothly transition between states.
 
+## Extra Points
+
+- How would you enhance the accessibility of the navigation menu to ensure it's compliant with web accessibility standards, such as adding ARIA attributes?
+- What techniques would you use to make the navigation menu content editable by users, allowing them to customize menu items or add their own links?
+- Can you implement a feature that automatically detects the user's preferred language and translates the menu items accordingly, providing a multilingual navigation experience?
+
 # Rubric
 
 | Criteria | Max Points | Novice | Intermediate | Proficient |
