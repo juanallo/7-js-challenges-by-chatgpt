@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        #quizzes {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: start;
+            gap: 10px;
+            padding: 10px 0;
+        }
+
+        #quiz-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .option {
+            font-size: 1rem;
+            margin: 10px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #score {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .quiz-button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="quizzes">
+        <button class="quiz-button" id="frontend-quiz">Frontend Development Quiz</button>
+        <button class="quiz-button" id="js-quiz">JavaScript Quiz</button>
+    </div>
+    <div id="quiz-container">
+        <h1>Quiz App</h1>
+        <div class="question" id="question">Select a quiz to start.</div>
+        <div class="options" id="options">
+        </div>
+        <div id="score">Score: 0</div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const questionElement = document.getElementById("question");
+            const optionsContainer = document.getElementById("options");
+            const scoreElement = document.getElementById("score");
+            const frontendQuizButton = document.getElementById("frontend-quiz");
+            const jsQuizButton = document.getElementById("js-quiz");
+
+            let currentQuiz = null;
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            const quizzes = {
+                "frontend-quiz": [
+                    {
+                        question: "What does HTML stand for?",
+                        options: ["Hyper Text Markup Language", "Highly Typed Modeling Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language"],
+                        correctAnswer: "Hyper Text Markup Language"
+                    },
+                    {
+                        question: "Which CSS property is used to change the text color of an element?",
+                        options: ["color", "background-color", "text-color", "font-color"],
+                        correctAnswer: "color"
+                    },
+                    {
+                        question: "What does CSS stand for?",
+                        options: ["Computer Style Sheets", "Cascading Style Sheets", "Colorful Style Sheets", "Creative Style Sheets"],
+                        correctAnswer: "Cascading Style Sheets"
+                    }
+                ],
+                "js-quiz": [
+                    {
+                        question: "What is a closure in JavaScript?",
+                        options: ["A function that has no parameters", "A way to protect variables from being modified", "A combination of a function and the lexical environment within which that function was declared", "A type of loop"],
+                        correctAnswer: "A combination of a function and the lexical environment within which that function was declared"
+                    },
+                    {
+                        question: "What is the purpose of the 'this' keyword in JavaScript?",
+                        options: ["To declare a variable", "To refer to the current object", "To create a loop", "To define a function"],
+                        correctAnswer: "To refer to the current object"
+                    },
+                    {
+                        question: "What is the result of 2 + '2' in JavaScript?",
+                        options: ["4", "22", "Error", "Undefined"],
+                        correctAnswer: "22"
+                    }
+                ]
+            };
+
+            frontendQuizButton.addEventListener("click", () => startQuiz("frontend-quiz"));
+            jsQuizButton.addEventListener("click", () => startQuiz("js-quiz"));
+
+            function startQuiz(quizId) {
+                currentQuiz = quizId;
+                currentQuestionIndex = 0;
+                score = 0;
+                showQuestion();
+                updateScore();
+            }
+
+            function showQuestion() {
+                if (currentQuiz) {
+                    const quiz = quizzes[currentQuiz];
+                    if (currentQuestionIndex < quiz.length) {
+                        const question = quiz[currentQuestionIndex];
+                        questionElement.textContent = question.question;
+                        optionsContainer.innerHTML = "";
+                        for (const option of question.options) {
+                            const optionElement = document.createElement("div");
+                            optionElement.classList.add("option");
+                            optionElement.textContent = option;
+                            optionElement.addEventListener("click", () => checkAnswer(option, question.correctAnswer));
+                            optionsContainer.appendChild(optionElement);
+                        }
+                    } else {
+                        // Quiz completed
+                        questionElement.textContent = "Quiz Completed!";
+                        optionsContainer.innerHTML = "";
+                        updateScore();
+                    }
+                } else {
+                    // No quiz selected
+                    questionElement.textContent = "Select a quiz to start.";
+                    optionsContainer.innerHTML = "";
+                    updateScore();
+                }
+            }
+
+            function checkAnswer(selectedOption, correctAnswer) {
+                if (selectedOption === correctAnswer) {
+                    score++;
+                }
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizzes[currentQuiz].length) {
+                    showQuestion();
+                } else {
+                    // Quiz completed
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsContainer.innerHTML = "";
+                }
+                updateScore();
+            }
+
+            function updateScore() {
+                scoreElement.textContent = `Score: ${score}`;
+            }
+        });
+    </script>
+</body>
+</html>
