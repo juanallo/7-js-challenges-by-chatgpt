@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        #weather-container {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        #city-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #current-weather {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        #forecast {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="weather-container">
+        <h1>Weather App</h1>
+        <input type="text" id="city-input" placeholder="Enter a city" required>
+        <button id="search-button">Search</button>
+        <div id="current-weather"></div>
+        <div id="forecast"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cityInput = document.getElementById("city-input");
+            const searchButton = document.getElementById("search-button");
+            const currentWeatherElement = document.getElementById("current-weather");
+            const forecastElement = document.getElementById("forecast");
+
+            // Function to display weather data
+            function displayWeatherData(weatherData) {
+                currentWeatherElement.textContent = `Current Weather: ${weatherData.current.temperature}°C, ${weatherData.current.conditions}, Humidity: ${weatherData.current.humidity}%`;
+                forecastElement.innerHTML = "<h2>3-Day Forecast</h2>";
+                for (const day of weatherData.forecast) {
+                    forecastElement.innerHTML += `<p>${day.day}: ${day.conditions}, ${day.temperature}°C</p>`;
+                }
+            }
+
+            // Function to fetch weather data using geolocation
+            async function fetchWeatherDataByLocation(location) {
+                try {
+                    //NOTE: you'll need an API key. Get it from here: https://openweathermap.org/api
+                    const API_KEY = `<ADD_API_KEY>`
+                    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${API_KEY}`).then(r => r.json())
+                    const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${location}&cnt=3&units=metric&4&exclude=hourly&appid=${API_KEY}`).then(r => r.json())
+                    const weatherData = adaptResponse(weatherResponse, forecastResponse)
+                    // Display the weather data
+                    displayWeatherData(weatherData);
+                } catch (error) {
+                    console.error("Error fetching weather data:", error);
+                }
+            }
+
+            function adaptResponse(weatherResponse, forecastResponse) {
+                const forecast = []
+
+                let dayCounter = 0
+                for(const day of forecastResponse.list) {
+                    const date = new Date()
+                    date.setDate(date.getDate() + dayCounter++)
+                    forecast.push({
+                        day: date.toLocaleDateString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric' }),
+                        conditions: day.weather[0].main,
+                        temperature: day.temp.day
+                    })
+                }
+
+                const weatherData = {
+                    current: {
+                        temperature: weatherResponse.main.temp,
+                        conditions: weatherResponse.weather[0].main,
+                        humidity: weatherResponse.main.humidity
+                    },
+                    forecast
+                }
+
+                return weatherData
+            }
+
+            // Event listener for the search button
+            searchButton.addEventListener("click", () => {
+                const city = cityInput.value;
+                if(city) {
+                    fetchWeatherDataByLocation(city);
+                }
+                else {
+                    alert('Please input a city first!')
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
