@@ -11,7 +11,7 @@ Give it a try, each folder is a challenge that contains:
 - a starter.html file containing the starter code.
 - a completed.html file showing one possible solution. There are multiple ways of doing the same. Feel free to pick your own adventure. 
  
-If you create something cool I would love to see it. Catch me at [@juan_allo](https://twitter.com/juan_allo)
+When you create something cool I would love to see it. Catch me at [@juan_allo](https://twitter.com/juan_allo)
 
 ## Running the code
 
