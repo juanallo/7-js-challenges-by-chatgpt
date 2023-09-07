@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Reset some default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Basic styling for the header */
+      header {
+        background-color: #333;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        height: 60px;
+        box-sizing: border-box;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* Styling for the navigation menu */
+      .navbar {
+        display: block;
+      }
+
+      .nav-list {
+        list-style-type: none;
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-list a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      /* Styling for the menu toggle button */
+      .menu-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Media query for responsive design */
+      @media (max-width: 768px) {
+        .nav-list {
+          display: none;
+          flex-direction: column;
+          text-align: center;
+          background-color: #333;
+          position: absolute;
+          top: 60px;
+          left: 0;
+          width: 100%;
+          transition: all 0.3s ease-in;
+          padding-bottom: 20px;
+        }
+
+        .nav-list.active {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: block;
+          position: absolute;
+          right: 20px;
+        }
+      }
+    </style>
+    <title>Responsive Navigation Menu</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Logo</div>
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <nav class="navbar">
+        <ul class="nav-list">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- Content of the website goes here -->
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menu-toggle");
+        const navbar = document.querySelector(".navbar");
+        const navList = document.querySelector(".nav-list");
+
+        // Toggle the navigation menu on button click
+        menuToggle.addEventListener("click", function () {
+          navList.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
+</html>
