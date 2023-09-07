@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Finder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        background-color: #3498db;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .search-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        padding: 5px;
+        width: 300px;
+        margin: 0 10px;
+      }
+
+      button {
+        padding: 5px 15px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .recipe-list {
+        margin: 20px;
+      }
+
+      /* Add more styles as needed */
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Recipe Finder</h1>
+      <div class="search-container">
+        <label for="ingredients">Enter Ingredients:</label>
+        <input
+          type="text"
+          id="ingredients"
+          placeholder="E.g., chicken, pasta, tomatoes"
+        />
+        <button id="search">Search</button>
+      </div>
+    </header>
+    <main>
+      <div class="recipe-list">
+        <!-- Recipes will be displayed here -->
+      </div>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchButton = document.getElementById("search");
+        const ingredientsInput = document.getElementById("ingredients");
+        const recipeList = document.querySelector(".recipe-list");
+
+        searchButton.addEventListener("click", function () {
+          const search = ingredientsInput.value;
+          searchRecipes(search).then(recipes => displayRecipes(recipes))
+        });
+
+        function displayRecipes(recipes) {
+          recipeList.innerHTML = "";
+          recipes.forEach((recipe) => {
+            const recipeCard = document.createElement("div");
+            recipeCard.classList.add("recipe-card");
+
+            const title = document.createElement("h2");
+            title.textContent = recipe.title;
+
+            const ingredients = document.createElement("p");
+            ingredients.textContent =
+              "Ingredients: " + recipe.ingredients.join(", ");
+
+            const instructions = document.createElement("p");
+            instructions.textContent = "Instructions: " + recipe.instructions;
+
+            const image = document.createElement("img");
+            image.src = recipe.image;
+            image.alt = recipe.title;
+
+            recipeCard.appendChild(title);
+            recipeCard.appendChild(ingredients);
+            recipeCard.appendChild(instructions);
+            recipeCard.appendChild(image);
+
+            recipeList.appendChild(recipeCard);
+          });
+        }
+
+        // Mock data (replace with your actual data)
+        const mockRecipeData = [
+          {
+            id: 1,
+            title: "Spaghetti Carbonara",
+            ingredients: ["spaghetti", "eggs", "bacon", "Parmesan cheese"],
+            instructions:
+              "Cook spaghetti according to package instructions. Fry bacon until crispy. Whisk eggs and Parmesan cheese in a bowl. Toss cooked spaghetti with bacon and egg mixture. Serve hot.",
+            image:
+              "https://images.unsplash.com/photo-1579631542720-3a87824fff86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          },
+          {
+            id: 2,
+            title: "Chicken Alfredo",
+            ingredients: [
+              "chicken breast",
+              "fettuccine",
+              "heavy cream",
+              "Parmesan cheese",
+            ],
+            instructions:
+              "Season chicken breast and cook until done. Cook fettuccine according to package instructions. Heat heavy cream in a saucepan and add Parmesan cheese. Toss cooked pasta with sauce and sliced chicken. Garnish with parsley.",
+            image:
+              "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          },
+          {
+            id: 3,
+            title: "Vegetable Stir-Fry",
+            ingredients: [
+              "bell peppers",
+              "broccoli",
+              "carrots",
+              "tofu",
+              "soy sauce",
+            ],
+            instructions:
+              "Cut vegetables into bite-sized pieces. Stir-fry tofu in a pan until browned. Add vegetables and soy sauce. Cook until vegetables are tender. Serve over rice.",
+            image:
+              "https://plus.unsplash.com/premium_photo-1664475934279-2631a25c42ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          },
+          {
+            id: 4,
+            title: "Caprese Salad",
+            ingredients: [
+              "tomatoes",
+              "fresh mozzarella",
+              "fresh basil",
+              "balsamic vinegar",
+              "olive oil",
+            ],
+            instructions:
+              "Slice tomatoes and fresh mozzarella. Arrange on a plate with fresh basil leaves. Drizzle with balsamic vinegar and olive oil. Season with salt and pepper.",
+            image:
+              "https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          },
+          {
+            id: 5,
+            title: "Chocolate Chip Cookies",
+            ingredients: [
+              "butter",
+              "sugar",
+              "eggs",
+              "flour",
+              "chocolate chips",
+            ],
+            instructions:
+              "Cream together butter and sugar. Add eggs and mix well. Stir in flour and chocolate chips. Drop spoonfuls of dough onto a baking sheet. Bake at 350°F (175°C) for 10-12 minutes.",
+            image:
+              "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+          },
+          // Add more recipes as needed
+        ];
+
+        async function searchRecipes(search) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              // Simulate an API response by using the mock data
+              const recipes = mockRecipeData.filter((recipe) =>
+                recipe.ingredients.some((ingredient) =>
+                  ingredient.toLowerCase().includes(search.toLowerCase())
+                )
+              );
+
+              resolve(recipes);
+            }, 1000); // Simulate a 1-second delay to mimic async behavior
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
