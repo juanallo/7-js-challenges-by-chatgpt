@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Validation</title>
+
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      form {
+        width: 300px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        box-sizing: border-box;
+        display: block;
+        margin-bottom: 5px;
+      }
+      input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form Validation</h1>
+    <form id="validationForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" data-validation="notEmpty" />
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" data-validation="email" />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        data-validation="notEmpty"
+      />
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        data-validation="passwordMatch"
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script>
+      const FormValidator = (function () {
+        // Public validation functions
+        return {
+          validateForm(form) {
+            const inputs = form.querySelectorAll("[data-validation]");
+            let isFormValid = true;
+
+            // Validate each input
+            for (const input of inputs) {
+              const inputValue = input.value;
+              const validationType = input.getAttribute("data-validation");
+
+              let isValid = false;
+
+              switch (validationType) {
+                case "notEmpty":
+                  isValid = inputValue.trim() !== "";
+                  break;
+                case "email":
+                  const emailPattern =
+                    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+                  isValid = emailPattern.test(inputValue);
+                  break;
+                case "passwordMatch":
+                  const password = form.querySelector(
+                    '[name="password"]'
+                  ).value;
+                  isValid = inputValue === password;
+                  break;
+                default:
+                  isValid = true; // Default to true if no matching validation type
+              }
+
+              if (!isValid) {
+                alert(`Invalid input for ${input.name}.`);
+                isFormValid = false;
+                break; // Stop validation on the first error
+              }
+            }
+
+            return isFormValid;
+          },
+        };
+      })();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("validationForm");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from submitting
+
+          // Validate the entire form
+          const isFormValid = FormValidator.validateForm(form);
+
+          if (isFormValid) {
+            // If all validations pass, you can proceed with form submission
+            alert("Form submitted successfully!");
+            form.reset(); // Clear the form
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
