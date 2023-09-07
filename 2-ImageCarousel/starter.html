@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Image Carousel</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dynamic Image Carousel</h1>
+
+    <div class="carousel-container">
+      <!-- Images and navigation controls will go here -->
+    </div>
+
+    <script>
+      const images = [
+        "https://images.unsplash.com/photo-1693845886349-54208259fe49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=500&q=80",
+        "https://images.unsplash.com/photo-1693934189611-cfba028d2225?ixlib=rb-4.0.3&ixid=M3xMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=500&q=80",
+        "https://images.unsplash.com/photo-1693590229697-a3b69c86a9c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=500&q=80",
+      ];
+      const captions = ["Caption 1", "Caption 2", "Caption 3"];
+
+      const carouselContainer = document.querySelector(".carousel-container");
+      const image = document.createElement("img");
+      image.src = images[0];
+      carouselContainer.appendChild(image);
+
+      //prev=&#10094;
+      //next=&#10095;
+
+    </script>
+  </body>
+</html>
